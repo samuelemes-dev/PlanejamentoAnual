@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento de Ensaios - Orquestra</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎼 Planejamento de Ensaios</h1>
+            <div id="orchestraName"></div>
+        </header>
+
+        <!-- Tela de Cadastro da Orquestra -->
+        <div id="setupScreen" class="screen">
+            <div class="card">
+                <h2>Cadastro da Orquestra</h2>
+                <form id="orchestraForm">
+                    <div class="form-group">
+                        <label for="name">Nome da Orquestra:</label>
+                        <input type="text" id="name" required placeholder="Ex: Orquestra Sinfônica Municipal">
+                    </div>
+                    <div class="form-group">
+                        <label for="conductor">Maestro(a):</label>
+                        <input type="text" id="conductor" required placeholder="Nome do(a) maestro(a)">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Local dos Ensaios:</label>
+                        <input type="text" id="location" required placeholder="Ex: Teatro Municipal">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar e Continuar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tela de Configuração -->
+        <div id="configScreen" class="screen hidden">
+            <div class="card">
+                <h2>Configuração do Planejamento</h2>
+                <form id="configForm">
+                    <div class="form-group">
+                        <label for="year">Ano:</label>
+                        <input type="number" id="year" required min="2024" max="2030" value="2024">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Dias de Ensaio:</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="days" value="0"> Domingo
+                            </label>
+                            <label>
+                                <input type="checkbox" name="days" value="1"> Segunda-feira
+                            </label>
+                            <label>
+                                <input type="checkbox" name="days" value="2"> Terça-feira
+                            </label>
+                            <label>
+                                <input type="checkbox" name="days" value="3"> Quarta-feira
+                            </label>
+                            <label>
+                                <input type="checkbox" name="days" value="4"> Quinta-feira
+                            </label>
+                            <label>
+                                <input type="checkbox" name="days" value="5" checked> Sexta-feira
+                            </label>
+                            <label>
+                                <input type="checkbox" name="days" value="6"> Sábado
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="defaultTime">Horário Padrão:</label>
+                        <input type="time" id="defaultTime" value="19:00">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Gerar Planejamento</button>
+                    <button type="button" class="btn btn-secondary" onclick="editOrchestra()">Editar Cadastro</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tela de Planejamento -->
+        <div id="planningScreen" class="screen hidden">
+            <div class="controls">
+                <button class="btn btn-secondary" onclick="backToConfig()">← Voltar</button>
+                <button class="btn btn-success" onclick="exportPlanning()">📥 Exportar</button>
+                <button class="btn btn-info" onclick="printPlanning()">🖨️ Imprimir</button>
+            </div>
+
+            <div id="planningInfo" class="info-box"></div>
+
+            <div class="filter-group">
+                <label for="monthFilter">Filtrar por mês:</label>
+                <select id="monthFilter" onchange="filterByMonth()">
+                    <option value="all">Todos os meses</option>
+                    <option value="0">Janeiro</option>
+                    <option value="1">Fevereiro</option>
+                    <option value="2">Março</option>
+                    <option value="3">Abril</option>
+                    <option value="4">Maio</option>
+                    <option value="5">Junho</option>
+                    <option value="6">Julho</option>
+                    <option value="7">Agosto</option>
+                    <option value="8">Setembro</option>
+                    <option value="9">Outubro</option>
+                    <option value="10">Novembro</option>
+                    <option value="11">Dezembro</option>
+                </select>
+            </div>
+
+            <div id="rehearsalsList"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
